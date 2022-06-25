@@ -31,7 +31,7 @@ class Wallet(models.Model):
 class Transaction(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user')
-    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user', null=True, blank=True)
     transaction_type = models.CharField(choices=TYPE_CHOICES,max_length=20)
     amount = models.DecimalField(max_digits=9, decimal_places=2,default=0)
     transaction_code = models.CharField(max_length=255, null=True, blank=True)
