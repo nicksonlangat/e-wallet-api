@@ -76,7 +76,8 @@ docs/_build/
 
 # PyBuilder
 target/
-
+test.py
+tes2.py
 
 ### Django ###
 *.log

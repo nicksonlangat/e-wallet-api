@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
-    
+    # wallet = 
     class Meta:
         model = get_user_model()
         fields = [
@@ -14,6 +14,9 @@ class UserSerializer(serializers.ModelSerializer):
             "is_superuser", "is_staff",
             "is_active",
         ]
+    
+    # def get_wallet(self, obj):
+    #     id = obj['id']
 
 
 class SignupSerializer(serializers.ModelSerializer):

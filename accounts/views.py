@@ -7,7 +7,7 @@ from rest_framework import exceptions
 from accounts.utils import get_tokens_for_user
 from . import serializers
 
-class UserListView(mixins.ListModelMixin, viewsets.GenericViewSet):
+class UserListView(mixins.ListModelMixin,mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = [AllowAny]
     queryset = get_user_model().objects.all()
     serializer_class = serializers.UserSerializer

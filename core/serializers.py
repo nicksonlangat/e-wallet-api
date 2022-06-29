@@ -23,17 +23,20 @@ class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = [
-            'id','sender','recipient',
+            'id','sender','recipient_account','recipient',
             'transaction_type','amount',
             'transaction_code','transaction_date','is_successful'
         ]
     def create(self, validated_data):
         type = validated_data['transaction_type']
         sender = validated_data['sender']
-        recipient = validated_data['recipient']
+        recipient_account = validated_data['recipient_account']
+        if recipient_account:
+            recipient = Wallet.objects.get(account_number=recipient_account).user
         amount = validated_data['amount']
         sender_wallet = Wallet.objects.get(user=sender)
         if type == 'Deposit':
+            recipient = sender
             if amount <= 0:
                 raise serializers.ValidationError(f'You cannot deposit {amount} as it is below the minimum. Please try a bigger amount.')
             sender_wallet.wallet_balance += amount
@@ -51,11 +54,11 @@ class TransactionSerializer(serializers.ModelSerializer):
                 sender_wallet.save(update_fields=["wallet_balance"])
                 recipient_wallet.wallet_balance += amount
                 recipient_wallet.save(update_fields=["wallet_balance"])
-        return Transaction.objects.create(**validated_data)
+        return Transaction.objects.create(recipient=recipient,**validated_data)
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep["sender"] = UserSerializer(instance.sender).data
-        rep["recipient"] = UserSerializer(instance.sender).data
+        rep["recipient"] = UserSerializer(instance.recipient).data
         return rep
 
