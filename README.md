@@ -1,6 +1,6 @@
 ## APP SCREENS
-![1](screens/1.PNG)
 ![1](screens/2.PNG)
+![1](screens/1.PNG)
 ![1](screens/3.PNG)
 ![1](screens/4.PNG)
 ## Getting started
@@ -18,7 +18,7 @@ These instructions will get you a copy of the project up and running in your loc
 
 ### Setting up and Activating a Virtual Environment
 - Create a working space in your local machine
-- Clone this [repository](https://github.com/nicksonlangat/e_wallets_api.git) `git clone https://github.com/nicksonlangat/e_wallets_api.git`
+- Clone this [repository](https://github.com/nicksonlangat/e-wallet-api.git) `git clone https://github.com/nicksonlangat/e-wallet-api.git`
 - Navigate to the project directory
 - Create a virtual environment `python3 -m venv name_of_your_virtual_environment` and activate it `source name_of_your_virtual_environment/bin/activate`
 - Create a .env file in root directory and put these key=values in it:
